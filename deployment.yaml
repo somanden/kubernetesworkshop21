@@ -39,3 +39,26 @@ spec:
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
+
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    run: somandens
+  name: somandens
+  selfLink: /api/v1/namespaces/default/services/somandens
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - nodePort: 31194
+    port: 9000
+    protocol: TCP
+    targetPort: 9000
+  selector:
+    run: somandens
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer: {}
